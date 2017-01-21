@@ -20,10 +20,8 @@ public class GameConsole {
 		String title = "Guessing Game";
 		String prompt = " Your Guess ? : ";
 		int num;
-		int guesses =0;
 		System.out.println(title);
 		while (true) {
-			guesses++;
 			System.out.print(prompt);
 			num = Integer.parseInt(sc.nextLine());
 			game.guess(num);
@@ -31,15 +29,15 @@ public class GameConsole {
 			if (game.guess(num) == true) {
 				break;
 			}
-
+			game.getCounts();
 		}
-		System.out.println("You used "+guesses + " guesses");
+		System.out.println("You used "+game.getCounts() + " guesses");
 		return game.getSecret();
 	}
 
 	/** create objects and start the game */
 	public static void main(String[] args) {
-		GuessingGame game = new GuessingGame(20);
+		GuessingGame game = new GuessingGame(10);
 		GameConsole ui = new GameConsole();
 		ui.play(game);
 	}

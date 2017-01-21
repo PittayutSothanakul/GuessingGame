@@ -14,6 +14,19 @@ public class GuessingGame {
 	private int upperBound;
 	private int secret;
 	private String hint;
+	private int count;
+	private int num =0;
+
+	
+	/**
+	 *  Count the most recent guess
+	 * @return count based on most recent guess
+	 */
+	public int getCounts() {
+		count++;
+		return count;
+	}
+
 
 	/**
 	 * Initialize a new game.
@@ -23,7 +36,7 @@ public class GuessingGame {
 	 */
 	public GuessingGame(int upperBound) {
 		this.upperBound = upperBound;
-		this.secret = getRandomNumber(20);
+		this.secret = getRandomNumber(upperBound);
 		this.hint = "I'm thinking of aa number between 1 and " + upperBound;
 	}
 
