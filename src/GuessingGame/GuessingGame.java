@@ -1,11 +1,12 @@
-package GuessingGame;
+package guessinggame;
 
 import java.util.Random; // for random numbers
 
 /**
  * Game of guessing a secret number.-- Game hint number for augury
  * 
- * @author PitSot
+ * @author Pittayut Sothanakul
+ * @version 01/02/60
  */
 
 public class GuessingGame {
@@ -14,19 +15,17 @@ public class GuessingGame {
 	private int upperBound;
 	private int secret;
 	private String hint;
-	private int count;
-	private int num =0;
+	private int count = 0;
 
-	
 	/**
-	 *  Count the most recent guess
+	 * Count the most recent guess
+	 * 
 	 * @return count based on most recent guess
 	 */
 	public int getCounts() {
-		count++;
+
 		return count;
 	}
-
 
 	/**
 	 * Initialize a new game.
@@ -37,7 +36,7 @@ public class GuessingGame {
 	public GuessingGame(int upperBound) {
 		this.upperBound = upperBound;
 		this.secret = getRandomNumber(upperBound);
-		this.hint = "I'm thinking of aa number between 1 and " + upperBound;
+		this.hint = "I'm thinking of a number between 1 and " + upperBound;
 	}
 
 	/**
@@ -61,19 +60,24 @@ public class GuessingGame {
 	 * @return new hint if you guess true or false
 	 */
 	public boolean guess(int number) {
+		count++;
+		boolean check = false;
 		if (number == this.secret) {
+			check = true;
 			setHint("Correct. The secret is " + this.secret);
-			return true;
+			return check;
 
-		} else if (number > this.secret) {
-			setHint("Sorry, your guess is too large");
-			return false;
-		} else if (number < this.secret) {
-			setHint("Sorry, your guess is too small");
-			return false;
 		} else {
-			return false;
+			check = false;
+			if (number > this.secret) {
+				setHint("Sorry, your guess is too large");
+
+			} else if (number < this.secret) {
+				setHint("Sorry, your guess is too small");
+			}
+			return check;
 		}
+
 	}
 
 	/**
@@ -93,15 +97,6 @@ public class GuessingGame {
 	 */
 	public void setHint(String hint) {
 		this.hint = hint;
-	}
-
-	/**
-	 * return correct answer
-	 * 
-	 * @return secret to show correct answer
-	 */
-	public int getSecret() {
-		return secret;
 	}
 
 }

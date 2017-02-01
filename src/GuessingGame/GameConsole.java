@@ -1,18 +1,19 @@
-package GuessingGame;
+package guessinggame;
 
 import java.util.Scanner;
 
 /**
  * the game console method for play a game
  * 
- * @author PitSot
- * @version 20/1/60
+ * @author Pittayut Sothanakul
+ * @version 01/02/60
  */
 public class GameConsole {
 	/**
-	 *  the method for input number by user and show guess
+	 * the method for input number by user and show guess
+	 * 
 	 * @param game
-	 * 				Receive upperBound number
+	 *            Receive upperBound number
 	 * @return secret number
 	 */
 	public int play(GuessingGame game) {
@@ -20,25 +21,19 @@ public class GameConsole {
 		String title = "Guessing Game";
 		String prompt = " Your Guess ? : ";
 		int num;
+		boolean check = false;
 		System.out.println(title);
-		while (true) {
+		System.out.println(game.getHint());
+		do {
 			System.out.print(prompt);
 			num = Integer.parseInt(sc.nextLine());
-			game.guess(num);
+			check = game.guess(num);
 			System.out.println(game.getHint());
-			if (game.guess(num) == true) {
-				break;
-			}
-			game.getCounts();
-		}
-		System.out.println("You used "+game.getCounts() + " guesses");
-		return game.getSecret();
+
+		} while (!check);
+		System.out.println("You used " + game.getCounts() + " guesses");
+		return num;
+
 	}
 
-	/** create objects and start the game */
-	public static void main(String[] args) {
-		GuessingGame game = new GuessingGame(10);
-		GameConsole ui = new GameConsole();
-		ui.play(game);
-	}
 }
